@@ -7,7 +7,7 @@
 URL：https://www.site-lab.jp/
 URL：https://www.logw.jp/
 
-目的：CentOS7にてApache+PHPの環境をインストール
+目的：CentOS7にてシステム更新（テスト用でもあるので実際の実行はユーザーが'y'を押したら。'n'を押したらキャンセル）
 
 COMMENT
 
@@ -44,5 +44,5 @@ echo "yum updateを実行します"
 echo ""
 
 start_message
-yum -y update
+yum  update
 end_message
