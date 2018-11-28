@@ -29,6 +29,7 @@ echo ""
 
 #umaskの確認
 start_message
+echo "現在の設定を確認"
 umask
 echo "ディレクトリを775、ファイルが664になるように変更"
 echo "umask 0002"
