@@ -27,6 +27,13 @@ echo "======================完了======================"
 echo ""
 }
 
+#umaskの確認
+start_message
+umask
+echo "ディレクトリを775、ファイルが664になるように変更"
+echo "umask 0002"
+umask 0002
+end_message
 #EPELリポジトリのインストール
 start_message
 yum -y install epel-release
