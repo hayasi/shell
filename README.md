@@ -26,3 +26,4 @@ SFTPなどでアップロードをして、rootユーザーもしくはsudo権�
 * yumupdateの実行
 
 start.shはテスト用となります。yum updateコマンドを実行しますが、yesかnoか聞いてくるようになっています。
+CentOS7以外では動作しないようになっています。
