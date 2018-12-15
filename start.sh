@@ -11,8 +11,6 @@ URL：https://www.logw.jp/
 
 COMMENT
 
-echo "インストールスクリプトを開始します"
-echo "このスクリプトのインストール対象はCentOS7です。"
 echo ""
 
 start_message(){
@@ -27,6 +25,34 @@ echo "======================完了======================"
 echo ""
 }
 
+#変数
+if [ -e /etc/redhat-release ]; then
+    DIST="redhat"
+    DIST_VER=`cat /etc/redhat-release | sed -e "s/.*\s\([0-9]\)\..*/\1/"`
+    #DIST_VER=`cat /etc/redhat-release | perl -pe 's/.*release ([0-9.]+) .*/$1/' | cut -d "." -f 1`
+
+    if [ $DIST = "redhat" ];then
+      if [ $DIST_VER = "7" ];then
+        echo "インストールスクリプトを開始します"
+        yum update
+      else
+        echo "CentOS7以外のため、このスクリプトは使えません。このスクリプトのインストール対象はCentOS7です。"
+      fi
+    fi
+
+else
+  echo "このスクリプトのインストール対象はCentOS7です。CentOS7以外は動きません。"
+  cat << EOF
+  EOF
+fi
+
+
+
+
+
+
+
+<<COMMENT
 #umaskの確認
 start_message
 echo "現在の設定を確認"
@@ -54,3 +80,6 @@ echo ""
 start_message
 yum  update
 end_message
+
+exec $SHELL -l
+COMMENT
