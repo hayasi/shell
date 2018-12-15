@@ -6,8 +6,13 @@
 * gitのインストール
 * yumupdateの実行
 
-## 実行環境
+## テスト環境
 * conohaのVPS
+* メモリ：512MB
+* CPU：1コア
+* SSD：20GB
+
+### さくらのVPS
 * メモリ：512MB
 * CPU：1コア
 * SSD：20GB
