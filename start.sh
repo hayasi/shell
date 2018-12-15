@@ -36,14 +36,15 @@ if [ -e /etc/redhat-release ]; then
         echo "インストールスクリプトを開始します"
         yum update
       else
-        echo "CentOS7以外のため、このスクリプトは使えません。このスクリプトのインストール対象はCentOS7です。"
+        echo "CentOS7ではないため、このスクリプトは使えません。このスクリプトのインストール対象はCentOS7です。"
       fi
     fi
 
 else
   echo "このスクリプトのインストール対象はCentOS7です。CentOS7以外は動きません。"
-  cat << EOF
-  EOF
+  cat <<EOF
+  検証LinuxディストリビューションはDebian・Ubuntu・Fedora・Arch Linux（アーチ・リナックス）となります。
+EOF
 fi
 
 
