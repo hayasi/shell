@@ -34,7 +34,33 @@ if [ -e /etc/redhat-release ]; then
     if [ $DIST = "redhat" ];then
       if [ $DIST_VER = "7" ];then
         echo "インストールスクリプトを開始します"
-        yum update
+        #umaskの確認
+        start_message
+        echo "現在の設定を確認"
+        umask
+        echo "ディレクトリを775、ファイルが664になるように変更"
+        echo "umask 0002"
+        umask 0002
+        end_message
+        #EPELリポジトリのインストール
+        start_message
+        yum -y install epel-release
+        end_message
+
+        #gitリポジトリのインストール
+        start_message
+        yum -y install git
+        end_message
+
+
+
+        # yum updateを実行
+        echo "yum updateを実行します"
+        echo ""
+
+        start_message
+        yum  update
+        end_message
       else
         echo "CentOS7ではないため、このスクリプトは使えません。このスクリプトのインストール対象はCentOS7です。"
       fi
@@ -47,40 +73,4 @@ else
 EOF
 fi
 
-
-
-
-
-
-
-<<COMMENT
-#umaskの確認
-start_message
-echo "現在の設定を確認"
-umask
-echo "ディレクトリを775、ファイルが664になるように変更"
-echo "umask 0002"
-umask 0002
-end_message
-#EPELリポジトリのインストール
-start_message
-yum -y install epel-release
-end_message
-
-#gitリポジトリのインストール
-start_message
-yum -y install git
-end_message
-
-
-
-# yum updateを実行
-echo "yum updateを実行します"
-echo ""
-
-start_message
-yum  update
-end_message
-
 exec $SHELL -l
-COMMENT
