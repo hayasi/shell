@@ -25,7 +25,7 @@ echo "======================完了======================"
 echo ""
 }
 
-#変数
+#CentOS7か確認
 if [ -e /etc/redhat-release ]; then
     DIST="redhat"
     DIST_VER=`cat /etc/redhat-release | sed -e "s/.*\s\([0-9]\)\..*/\1/"`
@@ -33,7 +33,27 @@ if [ -e /etc/redhat-release ]; then
 
     if [ $DIST = "redhat" ];then
       if [ $DIST_VER = "7" ];then
-        echo "インストールスクリプトを開始します"
+        echo "こっちにスクリプトを入れる"
+      else
+        echo "CentOS7ではないため、このスクリプトは使えません。このスクリプトのインストール対象はCentOS7です。"
+      fi
+    fi
+
+else
+  echo "このスクリプトのインストール対象はCentOS7です。CentOS7以外は動きません。"
+  cat <<EOF
+  検証LinuxディストリビューションはDebian・Ubuntu・Fedora・Arch Linux（アーチ・リナックス）となります。
+EOF
+fi
+
+#CentOS7か確認
+if [ -e /etc/redhat-release ]; then
+    DIST="redhat"
+    DIST_VER=`cat /etc/redhat-release | sed -e "s/.*\s\([0-9]\)\..*/\1/"`
+    #DIST_VER=`cat /etc/redhat-release | perl -pe 's/.*release ([0-9.]+) .*/$1/' | cut -d "." -f 1`
+
+    if [ $DIST = "redhat" ];then
+      if [ $DIST_VER = "7" ];then
         #umaskの確認
         start_message
         echo "現在の設定を確認"
@@ -72,5 +92,12 @@ else
   検証LinuxディストリビューションはDebian・Ubuntu・Fedora・Arch Linux（アーチ・リナックス）となります。
 EOF
 fi
+
+
+
+
+
+
+
 
 exec $SHELL -l
