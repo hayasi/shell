@@ -29,7 +29,6 @@ echo ""
 if [ -e /etc/redhat-release ]; then
     DIST="redhat"
     DIST_VER=`cat /etc/redhat-release | sed -e "s/.*\s\([0-9]\)\..*/\1/"`
-    #DIST_VER=`cat /etc/redhat-release | perl -pe 's/.*release ([0-9.]+) .*/$1/' | cut -d "." -f 1`
 
     if [ $DIST = "redhat" ];then
       if [ $DIST_VER = "7" ];then
