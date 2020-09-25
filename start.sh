@@ -26,24 +26,24 @@ echo ""
 }
 
 #CentOS7か確認
-if [ -e /etc/redhat-release ]; then
-    DIST="redhat"
-    DIST_VER=`cat /etc/redhat-release | sed -e "s/.*\s\([0-9]\)\..*/\1/"`
+#if [ -e /etc/redhat-release ]; then
+#    DIST="redhat"
+#    DIST_VER=`cat /etc/redhat-release | sed -e "s/.*\s\([0-9]\)\..*/\1/"`
 
-    if [ $DIST = "redhat" ];then
-      if [ $DIST_VER = "7" ];then
-        echo "こっちにスクリプトを入れる"
-      else
-        echo "CentOS7ではないため、このスクリプトは使えません。このスクリプトのインストール対象はCentOS7です。"
-      fi
-    fi
+#    if [ $DIST = "redhat" ];then
+#      if [ $DIST_VER = "7" ];then
+#        echo "こっちにスクリプトを入れる"
+#      else
+#        echo "CentOS7ではないため、このスクリプトは使えません。このスクリプトのインストール対象はCentOS7です。"
+#      fi
+#    fi
 
-else
-  echo "このスクリプトのインストール対象はCentOS7です。CentOS7以外は動きません。"
-  cat <<EOF
-  検証LinuxディストリビューションはDebian・Ubuntu・Fedora・Arch Linux（アーチ・リナックス）となります。
-EOF
-fi
+#else
+#  echo "このスクリプトのインストール対象はCentOS7です。CentOS7以外は動きません。"
+#  cat <<EOF
+#  検証LinuxディストリビューションはDebian・Ubuntu・Fedora・Arch Linux（アーチ・リナックス）となります。
+#EOF
+#fi
 
 #CentOS7か確認
 if [ -e /etc/redhat-release ]; then
@@ -53,6 +53,27 @@ if [ -e /etc/redhat-release ]; then
 
     if [ $DIST = "redhat" ];then
       if [ $DIST_VER = "7" ];then
+
+        #プロンプトをechoを使って表示
+        echo -n "ドメイン名を入力してください":
+        #入力を受付、その入力を「str」に代入
+        read domain
+        #結果を表示
+        echo $domain
+
+        #SELinuxの確認
+        selinux= getenforce
+        if [ $selinux="Enforcing" ];then
+          echo "SELinuxは有効です。無効化します"
+          setenforce 0
+          getenforce
+        elif [$selinux="Disabled" ];then
+          echo "SElinuxは無効化されています"
+        else
+          echo "特になし"
+        fi
+
+
         #umaskの確認
         start_message
         echo "現在の設定を確認"
@@ -78,7 +99,7 @@ if [ -e /etc/redhat-release ]; then
         echo ""
 
         start_message
-        yum  update
+        #yum  update
         end_message
       else
         echo "CentOS7ではないため、このスクリプトは使えません。このスクリプトのインストール対象はCentOS7です。"
